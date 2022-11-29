@@ -6,21 +6,34 @@ nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
 
+
+
 " NERDComment
 nnoremap <C-_> :call nerdcommenter#Comment(0, "toggle")<CR>
 vnoremap <C-_> :call nerdcommenter#Comment(0, "toggle")<CR>
 inoremap <C-_> :call nerdcommenter#Comment(0, "toggle")<CR>
 
 " My maps
-map p P
+
+function FormatRust() 
+    !cargo fmt
+endfunction
+
 map <C-i> gt
+nmap <A-Up> :10winc ><CR>
+nmap <A-Down> :10winc <<CR>
+
+nmap <silent> <A-Left> :wincmd h<CR>
+nmap <silent> <A-Right> :wincmd l<CR>
+
 
 inoremap <A-j> <Esc>:m .+1<CR>==gi
 inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
-
+imap <C-f> :call FormatRust()<CR>
+nmap <C-f> :call FormatRust()<CR>
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
