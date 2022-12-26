@@ -1,0 +1,25 @@
+{
+  "languageserver": {
+    "ccls": {
+      "command": "ccls",
+      "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
+      "rootPatterns": [".ccls", "compile_commands.json", ".git/", ".hg/"],
+      "trace.server": "verbose",
+      "initializationOptions": {
+        "cache": {
+          "directory": ".ccls-cache"
+        },
+        "client": {
+          "snippetSupport": true
+        }, 
+	"index": {
+	    "onChange": true
+	},
+	"highlight": {"lsRanges": true},
+	"clang": {
+	    "resourceDir": "/usr/include/clang/12.0.1"
+	}
+      }
+    }
+  }
+}

@@ -22,12 +22,12 @@ Plug 'preservim/nerdcommenter' " Mutliline comment with C-_
 Plug 'neoclide/coc.nvim', {'branch': 'release'} 
 Plug 'kyazdani42/nvim-web-devicons' "for barbar
 Plug 'romgrk/barbar.nvim' "tab stuf
+Plug 'sbdchd/neoformat'
 
 " Rust 
 Plug 'neovim/nvim-lspconfig'
 Plug 'fannheyward/coc-rust-analyzer'
 Plug 'simrat39/rust-tools.nvim'
-
 
 "Plug 'davidhalter/jedi-vim'
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -99,6 +99,12 @@ endfunction
 
 au CursorHold * call TurnOffCaps()
 set updatetime=10
+
+" Closes vim tree on leave
+autocmd VimLeave * NERDTreeClose
+
+" Helps with documentation show
+autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 
 
 " Session management
