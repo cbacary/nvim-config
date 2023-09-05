@@ -1,56 +1,86 @@
-" Set variables
-
- let mapleader = 'Alt'
-
-
+let mapleader = 'Alt'
 
 filetype plugin indent on
-filetype plugin on
 syntax on
 
-" Must go before load Plugins
-let g:ale_disable_lsp = 1
+" Runtime path:
+" /usr/share/nvim/runtime
 
 " Plugins
 
 call plug#begin("~/.config/nvim/plugged")
 
-Plug 'EdenEast/nightfox.nvim' " Vim-Plug
-Plug 'vim-airline/vim-airline-themes' " Theme
-Plug 'rakr/vim-one' " Theme
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Syntax highlight
 Plug 'scrooloose/nerdtree' " File manager
-Plug 'kana/vim-smartinput' " double quoting things and such
-Plug 'preservim/nerdcommenter' " Mutliline comment with C-_
-Plug 'neoclide/coc.nvim', {'branch': 'release'} 
-Plug 'kyazdani42/nvim-web-devicons' "for barbar
-Plug 'romgrk/barbar.nvim' "tab stuf
+Plug 'nvim-lualine/lualine.nvim' " Status line thing
+Plug 'nvim-tree/nvim-web-devicons' " Needed for barbar
+Plug 'romgrk/barbar.nvim' " tab stuf
 
-" Rust 
+" Formatting stuff
+Plug 'Raimondi/delimitMate' " auto bracket stuff
+Plug 'preservim/nerdcommenter' " Mutliline comment
+Plug 'sbdchd/neoformat' " Do the format dance
+Plug 'lukas-reineke/indent-blankline.nvim' " Add a vertical line on indents
+
+" Provided clipboard support for copy / pasting from clipboard
+Plug 'matveyt/neoclip'
+
+" Autocompletion stuff
+Plug 'neoclide/coc.nvim', {'branch': 'release'} 
+
+" Rust
+Plug 'neovim/nvim-lspconfig'
 Plug 'fannheyward/coc-rust-analyzer'
 Plug 'simrat39/rust-tools.nvim'
 
+" JS Syntax highlighting
+Plug 'pangloss/vim-javascript'
+Plug 'HerringtonDarkholme/yats.vim'
+
+" Theme
+Plug 'Mofiqul/vscode.nvim'
+
+" Session Manager
+Plug 'rmagatti/auto-session'
+
 call plug#end()
 
+let g:coc_node_path = '/home/cbac/.nvm/versions/node/v19.7.0/bin/node'
+
+runtime sets.vim
 runtime theme.vim
 runtime mappings.vim
-runtime sets.vim
 
-fu! SaveSess()
-    execute 'mksession! ' . getcwd() . '/.session.vim'
-endfunction
+" MUST BE BEFORE auto-session load, closes nerdtree on vim exit
+autocmd VimLeave * NERDTreeClose
 
-fu! RestoreSess()
-if filereadable(getcwd() . '/.session.vim')
-    execute 'so ' . getcwd() . '/.session.vim'
-    if bufexists(1)
-        for l in range(1, bufnr('$'))
-            if bufwinnr(l) == -1
-                exec 'sbuffer ' . l
-            endif
-        endfor
+" Disable caps lock when entering normal mode.
+function TurnOffCaps()  
+    let capsState = matchstr(system('xset -q'), '00: Caps Lock:\s\+\zs\(on\|off\)\ze')
+    if capsState == 'on'
+        silent! execute ':!xdotool key Caps_Lock'
     endif
-endif
 endfunction
 
-autocmd VimLeave * call SaveSess()
-autocmd VimEnter * nested call RestoreSess()
+au CursorHold * call TurnOffCaps()
+set updatetime=10
+
+" Helps with documentation show
+autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+
+" Session Manager
+lua require('auto-session').setup()
+
+lua require('vscode').load("dark")
+
+lua vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+
+lua require('rust-tools').setup({})
+
+lua require('nvim-treesitter.configs').setup {
+            \ highlight = {
+                    \ enable = true,
+                  \ }
+      \ }
+
+lua require('lualine').setup()

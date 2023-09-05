@@ -1,10 +1,15 @@
 inoremap <C-H> <C-W>
 
-nnoremap <C-h>n :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
+function! ToggleNvimTree()
+  if nvimtree#status() == "loaded" && nvimtree#is_open() == 1
+    exe "NvimTreeClose"
+  else
+    exe "NvimTreeOpen"
+  endif
+endfunction
+
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
-
 
 " NERDComment
 nnoremap <C-_> :call nerdcommenter#Comment(0, "toggle")<CR>
@@ -12,14 +17,39 @@ vnoremap <C-_> :call nerdcommenter#Comment(0, "toggle")<CR>
 inoremap <C-_> :call nerdcommenter#Comment(0, "toggle")<CR>
 
 " My maps
-map p P
+
+" Copy and Paste from clipboard
+nnoremap p "+p
+nnoremap P "+P
+vnoremap p "+p
+vnoremap P "+P
+nnoremap y "+y
+vnoremap y "+y
+nnoremap Y "+Y
+
+function FormatRust() 
+    !cargo fmt
+endfunction
+
 map <C-i> gt
+
+" Window stuff
+nnoremap <C-s> :vsplit<CR> 
+
+nmap <A-Up> :10winc ><CR>
+nmap <A-Down> :10winc <<CR>
+
+nmap <silent> <A-h> :wincmd h<CR>
+nmap <silent> <A-l> :wincmd l<CR>
+
+nnoremap <C-w> :wa<CR>:bd!<CR>
 
 inoremap <A-j> <Esc>:m .+1<CR>==gi
 inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
+nmap <A-f> :Neoformat <CR>
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -57,8 +87,8 @@ function! ShowDocumentation()
   endif
 endfunction
 
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" Highlight the symbol and its references when holding the cursor
+"autocmd CursorHold * silent call CocActionAsync('highlight')
 
 
 " Symbol renaming.
@@ -68,7 +98,6 @@ nmap <leader>rn <Plug>(coc-rename)
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
-nnoremap <C-s> :vsplit<CR> 
 
 " Removes the highlight after the escape key pressed when done searching
 nnoremap <esc> :noh<return><esc>
