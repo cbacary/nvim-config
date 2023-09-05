@@ -26,3 +26,6 @@ set updatetime=300
 set signcolumn=yes
 set fdm=syntax
 set foldlevel=99
+
+" True color cause otherwise i can't see
+set termguicolors

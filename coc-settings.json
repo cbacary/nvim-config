@@ -1,7 +1,19 @@
 {
+    "languageserver": {
+    "ccls": {
+      "command": "ccls",
+      "filetypes": ["c", "cpp", "objc", "objcpp"],
+      "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+      "initializationOptions": {
+        "cache": {
+          "directory": "/tmp/ccls-cache"
+        }
+      }
+    },
     "python.pythonPath": "~/python_conda",
     "python.linting.enabled": false,
     "python.linting.flake8Enabled": false,
     "python.linting.pylintEnabled": false,
+    "inlayHint.enable": false,
     "python.linting.pylintArgs": ["--disable=E0401,E0402,E1101"]
 }
