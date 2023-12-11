@@ -28,10 +28,13 @@ Plug 'matveyt/neoclip'
 " Autocompletion stuff
 Plug 'neoclide/coc.nvim', {'branch': 'release'} 
 
+" Github Copilot for nvim
+Plug 'github/copilot.vim'
+
 " Rust
-Plug 'neovim/nvim-lspconfig'
-Plug 'fannheyward/coc-rust-analyzer'
-Plug 'simrat39/rust-tools.nvim'
+"Plug 'neovim/nvim-lspconfig'
+"Plug 'fannheyward/coc-rust-analyzer'
+"Plug 'simrat39/rust-tools.nvim'
 
 " JS Syntax highlighting
 Plug 'pangloss/vim-javascript'
@@ -44,6 +47,9 @@ Plug 'Mofiqul/vscode.nvim'
 Plug 'rmagatti/auto-session'
 
 call plug#end()
+
+" Ignoring file types in nerd tree
+let g:NERDTreeIgnore = ['\.class']
 
 let g:coc_node_path = '/home/cbac/.nvm/versions/node/v19.7.0/bin/node'
 
@@ -70,12 +76,17 @@ autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 
 " Session Manager
 lua require('auto-session').setup()
-
+lua require("ibl").setup({
+            \ scope = {
+                    \ show_start = false,
+                    \ show_end = false
+                  \ }
+  \ })
 lua require('vscode').load("dark")
 
 lua vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
-lua require('rust-tools').setup({})
+"lua require('rust-tools').setup({})
 
 lua require('nvim-treesitter.configs').setup {
             \ highlight = {

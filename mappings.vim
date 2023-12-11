@@ -41,6 +41,10 @@ nmap <A-Down> :10winc <<CR>
 
 nmap <silent> <A-h> :wincmd h<CR>
 nmap <silent> <A-l> :wincmd l<CR>
+"nnoremap <silent> <C-l> :!tmux select-pane -R<CR>
+"nnoremap <silent> <C-h> :!tmux select-pane -L<CR>
+"nnoremap <silent> <C-j> :!tmux select-pane -D<CR>
+"nnoremap <silent> <C-k> :!tmux select-pane -U<CR>
 
 nnoremap <C-w> :wa<CR>:bd!<CR>
 
@@ -77,7 +81,7 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-nnoremap <silent> K :call ShowDocumentation()<CR>
+nnoremap <silent> <A-g> :call ShowDocumentation()<CR>
 
 function! ShowDocumentation()
   if CocAction('hasProvider', 'hover')
