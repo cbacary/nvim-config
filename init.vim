@@ -28,9 +28,6 @@ Plug 'matveyt/neoclip'
 " Autocompletion stuff
 Plug 'neoclide/coc.nvim', {'branch': 'release'} 
 
-" Github Copilot for nvim
-Plug 'github/copilot.vim'
-
 " Rust
 "Plug 'neovim/nvim-lspconfig'
 "Plug 'fannheyward/coc-rust-analyzer'
@@ -91,6 +88,7 @@ lua vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpo
 lua require('nvim-treesitter.configs').setup {
             \ highlight = {
                     \ enable = true,
+                    \ disable = {"vim"}
                   \ }
       \ }
 
