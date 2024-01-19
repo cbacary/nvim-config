@@ -17,6 +17,7 @@ vnoremap <C-_> :call nerdcommenter#Comment(0, "toggle")<CR>
 inoremap <C-_> :call nerdcommenter#Comment(0, "toggle")<CR>
 
 " My maps
+command! W write
 
 " Copy and Paste from clipboard
 nnoremap p "+p

@@ -20,11 +20,11 @@
         }
       }
     },
-    "python.pythonPath": "~/python_conda",
+    "python.pythonPath": "~/python_conda.sh",
     "python.linting.enabled": true,
-    "python.linting.flake8Enabled": false,
-    "python.linting.pylintEnabled": true,
-    "inlayHint.enable": false,
+    "python.linting.pylint": true,
+    "inlayHint.enable": true,
+    "python.formatting.provider": "black",
     "python.linting.pylintArgs": ["--disable=E0401,E0402,E1101"],
     "coc.source.buffer.enable": true,
     "coc.source.path.enable": true,

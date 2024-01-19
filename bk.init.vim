@@ -1,7 +1,7 @@
 let mapleader = 'Alt'
 
-filetype plugin indent on
-syntax on
+"filetype plugin indent on
+"syntax on
 
 " Runtime path:
 " /usr/share/nvim/runtime
@@ -15,6 +15,7 @@ Plug 'scrooloose/nerdtree' " File manager
 Plug 'nvim-lualine/lualine.nvim' " Status line thing
 Plug 'nvim-tree/nvim-web-devicons' " Needed for barbar
 Plug 'romgrk/barbar.nvim' " tab stuf
+Plug 'lewis6991/gitsigns.nvim' " git integration
 
 " Formatting stuff
 Plug 'Raimondi/delimitMate' " auto bracket stuff
@@ -27,11 +28,6 @@ Plug 'matveyt/neoclip'
 
 " Autocompletion stuff
 Plug 'neoclide/coc.nvim', {'branch': 'release'} 
-
-" Rust
-"Plug 'neovim/nvim-lspconfig'
-"Plug 'fannheyward/coc-rust-analyzer'
-"Plug 'simrat39/rust-tools.nvim'
 
 " JS Syntax highlighting
 Plug 'pangloss/vim-javascript'
@@ -50,9 +46,12 @@ let g:NERDTreeIgnore = ['\.class']
 
 let g:coc_node_path = '/home/cbac/.nvm/versions/node/v19.7.0/bin/node'
 
-runtime sets.vim
-runtime theme.vim
+"runtime sets.vim
+lua require('sets')
+"lua require('functions')
 runtime mappings.vim
+
+
 
 " MUST BE BEFORE auto-session load, closes nerdtree on vim exit
 autocmd VimLeave * NERDTreeClose
@@ -66,7 +65,6 @@ function TurnOffCaps()
 endfunction
 
 au CursorHold * call TurnOffCaps()
-set updatetime=10
 
 " Helps with documentation show
 autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
@@ -81,15 +79,16 @@ lua require("ibl").setup({
   \ })
 lua require('vscode').load("dark")
 
-lua vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+" Enforces what is saved by the session manager 
 
 "lua require('rust-tools').setup({})
 
 lua require('nvim-treesitter.configs').setup {
             \ highlight = {
                     \ enable = true,
-                    \ disable = {"vim"}
                   \ }
       \ }
 
 lua require('lualine').setup()
+
+lua require('gitsigns').setup()

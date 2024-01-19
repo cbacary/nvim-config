@@ -14,7 +14,6 @@ set autoindent
 set cc=80
 set cursorline
 set mouse=a
-set sessionoptions-=blank
 set backspace=indent,eol,start
 set splitright
 set ruler
