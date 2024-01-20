@@ -24,6 +24,7 @@ vim.g["semshi#mark_selected_nodes"] = false
 vim.g["semshi#update_delay_factor"] = 0.001
 
 -- Setting semshiGlobal to altfont essentially disables semshiGlobal
+-- highlight! link semshiAttribute @field
 vim.api.nvim_create_autocmd({ "VimEnter", "ColorScheme" }, {
     callback = function()
         vim.cmd([[
@@ -53,8 +54,8 @@ require("conform").setup({
         javascript = { { "prettierd", "prettier" } },
     },
     format_on_save = {
-        timeout_ms = 500,
-        lsp_fallback = true,
+        timeout_ms = 100,
+        lsp_fallback = false,
     },
 })
 
@@ -65,11 +66,10 @@ require('ibl').setup({
     scope = {
         -- Removes annoying thing that underlines current scope
         enabled = true,
-        show_start = true,
+        show_start = false,
         show_end = true,
     },
     indent = {
-        char = "|",
         smart_indent_cap = false,
     }
 })
