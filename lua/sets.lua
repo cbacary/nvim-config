@@ -15,6 +15,8 @@ vim.o.incsearch = true
 
 vim.o.updatetime = 10
 
+vim.cmd("autocmd FileType typescript,typescriptreact,javascript,javascriptreact setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab")
+
 -- Tab and indentation settings
 vim.o.tabstop = 8
 vim.o.softtabstop = 0
@@ -29,7 +31,7 @@ vim.o.undofile = true
 vim.opt.mouse = "a"
 
 -- Modify session options
-vim.opt.sessionoptions ="buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+vim.opt.sessionoptions ="buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
 
 -- Configure backspace behavior
 vim.opt.backspace = "indent,eol,start"
@@ -41,8 +43,6 @@ vim.opt.splitright = true
 vim.opt.ruler = true
 
 -- coc.nvim requirements
-vim.o.backup = false
-vim.o.writebackup = false
 vim.o.updatetime = 300
 vim.wo.signcolumn = "yes"
 
@@ -50,8 +50,10 @@ vim.wo.signcolumn = "yes"
 vim.o.termguicolors = true
 
 -- Important for nvim-ufo (folder)
---vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-vim.o.foldcolumn = '1' -- '0' is not bad
-vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldcolumn ='1'
+vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
+vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+
+vim.g.neoformat_enable_javascript = {'prettier'}
